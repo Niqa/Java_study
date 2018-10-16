@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class Employee implements Serializable {
     String name;
     String surname;
-    String email;
+    Email email;
 
     /**
      * klasa reprezentujaca pracownika
@@ -13,7 +13,7 @@ public class Employee implements Serializable {
      * @param surname nazwisko pracownika
      * @param email utworzony meila pracownika
      */
-    public Employee (String name, String surname, String email){
+    public Employee (String name, String surname, Email email){
         this.name = name.substring(0, 1).toUpperCase() + name.substring(1);
         this.surname = surname.substring(0, 1).toUpperCase() + surname.substring(1);
         this.email = email;
@@ -40,11 +40,11 @@ public class Employee implements Serializable {
         this.surname = surname;
     }
 
-    public String getEmail() {
+    public Email getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
+    public void setEmail(Email email) {
         this.email = email;
     }
 }

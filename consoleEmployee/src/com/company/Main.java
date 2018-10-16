@@ -48,7 +48,7 @@ public class Main {
              * przez funkcje createEmail() wywolana z obiektu email
              */
             email = new Email(name, surname);
-            employee = new Employee(name, surname, email.createEmail());
+            employee = new Employee(name, surname, email);
 
             /**
              * wywolanie metody zapisujacej do pliku
@@ -60,7 +60,7 @@ public class Main {
             /**
              * wypisanie emaila w konsoli
              */
-            System.out.println("E-mail: \n" + employee.getEmail());
+            System.out.println("E-mail: \n" + employee.getEmail().getEmailAdress());
 
             System.out.println("Czy chcesz dodać osobę? [t/n]");
             pause = scanner.nextLine().toLowerCase().charAt(0);
@@ -96,7 +96,7 @@ public class Main {
              */
             fileWriter = new FileWriter(file.getAbsoluteFile(), true);
             writer = new BufferedWriter(fileWriter);
-            writer.write(employee.getName() + " " + employee.getSurname() + ": " + employee.getEmail() + "\n");
+            writer.write(employee.getName() + " " + employee.getSurname() + ": " + employee.getEmail().getEmailAdress() + "\n");
 
             /**
              * obsluga wyjatku wejscia/ wyjscia

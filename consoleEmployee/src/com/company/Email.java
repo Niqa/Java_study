@@ -13,15 +13,17 @@ public class Email {
     private String name1;
     private String name2;
     private String sufix  = "mex.com";
+    private String emailAdress;
 
     /**
      *
      * @param name1 reprezentuje imię (człon drugi), zmienia przy wpisywaniu na małe litery zgodnie z formatem meila
      * @param name2 reprezentuje nazwisko (człon pierwszy), zmienia przy wpisywaniu na małe litery zgodnie z formatem meila
      */
-    public Email(String name1, String name2) {
+    public Email(String name1, String name2) throws FileNotFoundException {
         this.name1 = name1.toLowerCase();
         this.name2 = name2.toLowerCase();
+        this.emailAdress = createEmail();
     }
 
     /**
@@ -87,5 +89,13 @@ public class Email {
 
     public void setSufix(String sufix) {
         this.sufix = sufix;
+    }
+
+    public String getEmailAdress() {
+        return emailAdress;
+    }
+
+    public void setEmailAdress(String emailAdress) {
+        this.emailAdress = emailAdress;
     }
 }
