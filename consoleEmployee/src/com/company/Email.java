@@ -52,14 +52,7 @@ public class Email {
      * @throws FileNotFoundException jesli nie znalazl pliku wyrzuca wyjatek
      */
     public Boolean emailExist(String email) throws FileNotFoundException {
-        Scanner scanner = new Scanner(new File("C:\\Users\\Nikola\\Desktop\\Projekty java\\ex45\\resources\\emails.txt"));
-        while(scanner.hasNext()){
-            String line = scanner.nextLine().toLowerCase().toString();
-            if(line.contains(email)){
-                return true;
-            }
-        }
-        return false;
+        return Main.FileController.SearchInFile(email);
     }
 
     /**

@@ -55,7 +55,7 @@ public class Main {
              * @param file plik do ktorego zapisujemy
              * @param employee obiekt Employee
              */
-            writeToFile(file, employee);
+            FileController.writeToFile(file, employee);
 
             /**
              * wypisanie emaila w konsoli
@@ -68,53 +68,72 @@ public class Main {
 
     }
 
-    /**
-     * metoda zapisujaca dane pracownika do pliku
-     * @param file plik do ktorego zapisujemy dane
-     * @param employee obiekt z danymi pracownika
-     * @throws IOException wyrzuca wyjate wejscia/wyjscia
-     */
-    public static void writeToFile (File file, Employee employee) throws IOException {
+
+    public static class FileController {
 
         /**
-         * zmienne pozwalajace na zapis i odczyt pliku
+         * metoda zapisujaca dane pracownika do pliku
+         * @param file plik do ktorego zapisujemy dane
+         * @param employee obiekt z danymi pracownika
+         * @throws IOException wyrzuca wyjate wejscia/wyjscia
          */
-        FileWriter fileWriter = null;
-        BufferedWriter writer = null;
-        /**
-         * sprawdzamy czy plik istnieje
-         * jesli nie to go tworzymy
-         */
-        try {
-            if (!file.exists()) {
-                file.createNewFile();
-            }
+        public static void writeToFile (File file, Employee employee) throws IOException {
 
             /**
-             * tworzymy obiekty pozwalajace na zapis do pliku i nie nadpisuje pliku - tylko dopisuje
-             * zapisujemy imie, nazwisko, email do pliku
+             * zmienne pozwalajace na zapis i odczyt pliku
              */
-            fileWriter = new FileWriter(file.getAbsoluteFile(), true);
-            writer = new BufferedWriter(fileWriter);
-            writer.write(employee.getName() + " " + employee.getSurname() + ": " + employee.getEmail().getEmailAdress() + "\n");
+            FileWriter fileWriter = null;
+            BufferedWriter writer = null;
+            /**
+             * sprawdzamy czy plik istnieje
+             * jesli nie to go tworzymy
+             */
+            try {
+                if (!file.exists()) {
+                    file.createNewFile();
+                }
 
-            /**
-             * obsluga wyjatku wejscia/ wyjscia
-             * np. gdy nie mamy prawa dostepu do pliku, wyleci wyjatek i w tym miejscu zostanie obsluzony
-             */
-        } catch (IOException ex) {
-            throw new IOException(ex.getMessage());
-        } finally {
-            /**
-             * sekcja "finally" bedzie zawsze obsluzona czy wyjatek sie pojawi czy nie
-             * w sekcji tej sprawdzamy czy strumienie nie są puste i zamykamy je
-             */
-            if(writer != null){
-                writer.close();
+                /**
+                 * tworzymy obiekty pozwalajace na zapis do pliku i nie nadpisuje pliku - tylko dopisuje
+                 * zapisujemy imie, nazwisko, email do pliku
+                 */
+                fileWriter = new FileWriter(file.getAbsoluteFile(), true);
+                writer = new BufferedWriter(fileWriter);
+                writer.write(employee.getName() + " " + employee.getSurname() + ": " + employee.getEmail().getEmailAdress() + "\n");
+
+                /**
+                 * obsluga wyjatku wejscia/ wyjscia
+                 * np. gdy nie mamy prawa dostepu do pliku, wyleci wyjatek i w tym miejscu zostanie obsluzony
+                 */
+            } catch (IOException ex) {
+                throw new IOException(ex.getMessage());
+            } finally {
+                /**
+                 * sekcja "finally" bedzie zawsze obsluzona czy wyjatek sie pojawi czy nie
+                 * w sekcji tej sprawdzamy czy strumienie nie są puste i zamykamy je
+                 */
+                if(writer != null){
+                    writer.close();
+                }
+                if (fileWriter != null){
+                    fileWriter.close();
+                }
             }
-            if (fileWriter != null){
-                fileWriter.close();
+        }
+        public static boolean SearchInFile(String charSequence){
+            Scanner scanner = null;
+            try {
+                scanner = new Scanner(new File("C:\\Users\\Nikola\\Desktop\\Projekty java\\ex45\\resources\\emails.txt"));
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
             }
+            while(scanner.hasNext()){
+                String line = scanner.nextLine().toLowerCase().toString();
+                if(line.contains(charSequence.toLowerCase())){
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }
