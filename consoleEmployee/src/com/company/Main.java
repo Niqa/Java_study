@@ -27,7 +27,6 @@ public class Main {
         char pause = 't';
         Email email = null;
         Employee employee = null;
-        File file = new File("C:\\Users\\Nikola\\Desktop\\Projekty java\\ex45\\resources\\emails.txt");
 
         /**
          * petla nieskonczona umozliwiajaca koontynuacje programu
@@ -55,7 +54,7 @@ public class Main {
              * @param file plik do ktorego zapisujemy
              * @param employee obiekt Employee
              */
-            FileController.writeToFile(file, employee);
+            FileController.writeToFile(employee);
 
             /**
              * wypisanie emaila w konsoli
@@ -77,7 +76,8 @@ public class Main {
          * @param employee obiekt z danymi pracownika
          * @throws IOException wyrzuca wyjate wejscia/wyjscia
          */
-        public static void writeToFile (File file, Employee employee) throws IOException {
+        static File file = new File("C:\\Users\\Nikola\\Desktop\\Projekty java\\ex45\\resources\\emails.txt");
+        public static void writeToFile (Employee employee) throws IOException {
 
             /**
              * zmienne pozwalajace na zapis i odczyt pliku
@@ -123,7 +123,7 @@ public class Main {
         public static boolean SearchInFile(String charSequence){
             Scanner scanner = null;
             try {
-                scanner = new Scanner(new File("C:\\Users\\Nikola\\Desktop\\Projekty java\\ex45\\resources\\emails.txt"));
+                scanner = new Scanner(file);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
